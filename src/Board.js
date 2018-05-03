@@ -108,9 +108,7 @@
           return true;
         }
       }
-    
-      
-      return false; // fixme
+      return false;
     },
 
 
@@ -120,7 +118,7 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      return false;
     },
 
     // test if any columns on this board contain conflicts
@@ -136,18 +134,18 @@
       //   });
       // });
 
-      var attrN = this.attributes['n'];
+      var attrN = this.get('n');
+
       for (var i = 0; i < attrN; i++) {
         var count = 0;
         for (var j = 0; j < attrN; j++) {
-          this.get(j)[i];
-          count = count + this.get(j)[i];
+          count += this.get(j)[i];
         }
         if (count > 1) {
           return true;
         }
       }
-      return false; // fixme
+      return false;
     },
 
 
@@ -187,17 +185,17 @@
       var majorDiagonal = {};
       // loop through rows array
       var num = this.rows().length;
-      for (var i = 0; i < num; i++) {
-        for (var j = 0; j < num; j++) {
-          var k = i - j;
-          if (majorDiagonal[k]) {
-            majorDiagonal[k].push(this.rows()[i][j]);
-          } else {
+      for (var rowIndex = 0; rowIndex < num; rowIndex++) {
+        for (var columnIndex = 0; columnIndex < num; columnIndex++) {
+          //
+          var k = rowIndex - columnIndex;
+          if (!majorDiagonal[k]) {
             majorDiagonal[k] = [];
-            majorDiagonal[k].push(this.rows()[i][j]);
-          }
+          } 
+          majorDiagonal[k].push(this.rows()[rowIndex][columnIndex]);
         }
       }
+      console.log(majorDiagonal);
       for (var key in majorDiagonal) {
         if (majorDiagonal[key].reduce(function(acc, el) { return acc + el; }) > 1) {
           return true;
@@ -231,24 +229,24 @@
       var minorDiagonal = {};
       // loop through rows array
       var num = this.rows().length;
-      for (var i = 0; i < num; i++) {
-        for (var j = 0; j < num; j++) {
-          var k = i + j;
-          if (minorDiagonal[k]) {
-            minorDiagonal[k].push(this.rows()[i][j]);
-          } else {
-            minorDiagonal[k] = [];
-            minorDiagonal[k].push(this.rows()[i][j]);
+      for (var rowIndex = 0; rowIndex < num; rowIndex++) {
+        for (var columnIndex = 0; columnIndex < num; columnIndex++) {
+          //
+          var diagonalIndex = rowIndex + columnIndex;
+          if (!minorDiagonal[diagonalIndex]) {
+            minorDiagonal[diagonalIndex] = [];
           }
+          minorDiagonal[diagonalIndex].push(this.rows()[rowIndex][columnIndex]);
         }
       }
+
       for (var key in minorDiagonal) {
         if (minorDiagonal[key].reduce(function(acc, el) { return acc + el; }) > 1) {
           return true;
         }
       }
-      return false; // fixme
-    }
+      return false;
+    },
 
     /*--------------------  End of Helper Functions  ---------------------*/
 
