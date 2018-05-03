@@ -162,8 +162,59 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+    
+    // var rec = function (rowStart, colStart) {
+      
+    //   // var steps = 
+    //   var cycles;
+    //   rowStart = rowStart || 2; // ++
+    //   colStart = colStart || 0; // ++
+    //   if (Math.abs(rowStart - colStart) === 2) {
+    //     cycles = 2;
+    //   } else if (Math.abs(rowStart - colStart) === 1)
+    //     cycles = 3;
+    //   } else {
+    //     cycles = 4;
+    //   }
+          
+    //   return false; // fixme
+    //   }
+
+      // create storage obj
+
+
+
+      var majorDiagonal = {};
+      // loop through rows array
+      var num = this.rows().length;
+      for (var i = 0; i < num; i++) {
+        for (var j = 0; j < num; j++) {
+          var k = i - j;
+          if (majorDiagonal[k]) {
+            majorDiagonal[k].push(this.rows()[i][j]);
+          } else {
+            majorDiagonal[k] = [];
+            majorDiagonal[k].push(this.rows()[i][j]);
+          }
+        }
+      }
+      for (var key in majorDiagonal) {
+        if (majorDiagonal[key].reduce(function(acc, el) { return acc + el; }) > 1) {
+          return true;
+        }
+      }
+      return false;
     },
+    // loop through each row
+    // if _getFirstRowMajor of current el is -(n - 2)
+    // if storage obj at key -(n - 2) is undefined
+    // create empty array at key and push el to key
+    // else add to storage obj at key -(n - 2)
+      
+
+      
+      
+    
 
 
 
@@ -177,6 +228,25 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+      var minorDiagonal = {};
+      // loop through rows array
+      var num = this.rows().length;
+      for (var i = 0; i < num; i++) {
+        for (var j = 0; j < num; j++) {
+          var k = i + j;
+          if (minorDiagonal[k]) {
+            minorDiagonal[k].push(this.rows()[i][j]);
+          } else {
+            minorDiagonal[k] = [];
+            minorDiagonal[k].push(this.rows()[i][j]);
+          }
+        }
+      }
+      for (var key in minorDiagonal) {
+        if (minorDiagonal[key].reduce(function(acc, el) { return acc + el; }) > 1) {
+          return true;
+        }
+      }
       return false; // fixme
     }
 
