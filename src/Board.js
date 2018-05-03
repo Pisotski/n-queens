@@ -62,7 +62,7 @@
     },
 
 
-/*
+    /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
@@ -79,11 +79,37 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      
+      var row = this.get(rowIndex);
+        
+      // for (var pos of row) { 
+      //   pos++;
+      // }
+      
+      var res = row.reduce(function(acc, el) {
+        return acc + el;
+      });
+      return res > 1; // fixme
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+      
+      // for(let i = 0; i < this.rows(); i++) {
+      //     if (arr.hasRowConflictAt(i)) {
+      //     return true;
+      //       if (arr.reduce(function(acc, el) {return acc + el}) > 1) {
+      //   return true;
+      // }     
+      //   }
+
+      for (let arr of this.rows()) {
+        if (arr.reduce(function(acc, el) { return acc + el; }) > 1) {
+          return true;
+        }
+      }
+    
+      
       return false; // fixme
     },
 
@@ -99,6 +125,28 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      
+      // var objForCol = {};
+      
+      // this.rows().forEach(function(row,index) {
+
+      //   objForCol[index] = 0;
+      //   row.forEach(function(el, ind) {
+      //     objForCol[ind] = objForCol[ind] + el;
+      //   });
+      // });
+
+      var attrN = this.attributes['n'];
+      for (var i = 0; i < attrN; i++) {
+        var count = 0;
+        for (var j = 0; j < attrN; j++) {
+          this.get(j)[i];
+          count = count + this.get(j)[i];
+        }
+        if (count > 1) {
+          return true;
+        }
+      }
       return false; // fixme
     },
 
