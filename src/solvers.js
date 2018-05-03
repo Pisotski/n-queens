@@ -29,8 +29,6 @@ window.findNRooksSolution = function(n) {
     }
   }
 
-  // recursiveFunc(board)
-
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution.rows();
 };
@@ -47,7 +45,9 @@ window.countNRooksSolutions = function(n) {
 window.findNQueensSolution = function(n) {
   var solution = new Board({n: n}); //fixme
   // create new Board
+  var recursionForQueens = function(indexOfRow, indexOfCol, nRemainder) {
 
+  }
   for (var i = 0; i < n; i++) {
     for (var j = 0; j < n; j++) {
       solution.togglePiece(i, j);
@@ -55,7 +55,7 @@ window.findNQueensSolution = function(n) {
         solution.togglePiece(i, j);
       }
     }
-  } //fixme
+  }
 
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
   return solution.rows();
