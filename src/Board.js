@@ -160,39 +160,17 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-    
-    // var rec = function (rowStart, colStart) {
-      
-    //   // var steps = 
-    //   var cycles;
-    //   rowStart = rowStart || 2; // ++
-    //   colStart = colStart || 0; // ++
-    //   if (Math.abs(rowStart - colStart) === 2) {
-    //     cycles = 2;
-    //   } else if (Math.abs(rowStart - colStart) === 1)
-    //     cycles = 3;
-    //   } else {
-    //     cycles = 4;
-    //   }
-          
-    //   return false; // fixme
-    //   }
-
-      // create storage obj
-
-
-
       var majorDiagonal = {};
       // loop through rows array
       var num = this.rows().length;
       for (var rowIndex = 0; rowIndex < num; rowIndex++) {
         for (var columnIndex = 0; columnIndex < num; columnIndex++) {
           //
-          var k = rowIndex - columnIndex;
-          if (!majorDiagonal[k]) {
-            majorDiagonal[k] = [];
+          var diagonalIndex = rowIndex - columnIndex;
+          if (!majorDiagonal[diagonalIndex]) {
+            majorDiagonal[diagonalIndex] = [];
           } 
-          majorDiagonal[k].push(this.rows()[rowIndex][columnIndex]);
+          majorDiagonal[diagonalIndex].push(this.rows()[rowIndex][columnIndex]);
         }
       }
       console.log(majorDiagonal);
@@ -203,18 +181,6 @@
       }
       return false;
     },
-    // loop through each row
-    // if _getFirstRowMajor of current el is -(n - 2)
-    // if storage obj at key -(n - 2) is undefined
-    // create empty array at key and push el to key
-    // else add to storage obj at key -(n - 2)
-      
-
-      
-      
-    
-
-
 
     // Minor Diagonals - go from top-right to bottom-left
     // --------------------------------------------------------------
